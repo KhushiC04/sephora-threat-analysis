@@ -1,6 +1,8 @@
 -- ============================================================
 -- Sephora Threat Analysis — SQL Queries (Azure SQL Database)
 -- Database: sephora-threat-db | Server: khushi-sephora-server1
+-- Note: numbers below reflect the corrected dataset (word-boundary
+-- dupe-detection fix + combined_threat_score formula fix)
 -- ============================================================
 
 -- 1. Create the summary table
@@ -13,16 +15,16 @@ CREATE TABLE threat_summary (
     combined_threat_score FLOAT
 );
 
--- 2. Load the category-level results (computed earlier in Python)
+-- 2. Load the category-level results (computed in Python)
 INSERT INTO threat_summary (category, dupe_mentions, regulation_flagged_products, dupe_score, regulation_score, combined_threat_score)
 VALUES
-('Skincare', 1348, 635, 100.0, 100.0, 100.0),
-('Hair', 0, 242, 0.0, 38.11, 38.11),
-('Makeup', 0, 72, 0.0, 11.34, 11.34),
-('Bath & Body', 0, 40, 0.0, 6.30, 6.30),
-('Mini Size', 0, 22, 0.0, 3.46, 3.46),
-('Men', 0, 13, 0.0, 2.05, 2.05),
-('Fragrance', 0, 1, 0.0, 0.16, 0.16),
+('Skincare', 1090, 635, 100.0, 100.00, 100.00),
+('Hair', 0, 242, 0.0, 38.11, 19.06),
+('Makeup', 0, 72, 0.0, 11.34, 5.67),
+('Bath & Body', 0, 40, 0.0, 6.30, 3.15),
+('Mini Size', 0, 22, 0.0, 3.46, 1.73),
+('Men', 0, 13, 0.0, 2.05, 1.02),
+('Fragrance', 0, 1, 0.0, 0.16, 0.08),
 ('Gifts', 0, 0, 0.0, 0.0, 0.0),
 ('Tools & Brushes', 0, 0, 0.0, 0.0, 0.0);
 
